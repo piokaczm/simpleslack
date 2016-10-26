@@ -44,5 +44,3 @@ slack.PostDanger("danger message")
 // green colored message
 slack.PostSuccess("success message")
 ```
-
-## Contributing
