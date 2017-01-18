@@ -51,7 +51,7 @@ func (slack *Slack) PostSuccess(msg string) {
 
 // Add all needed options to payload and return it as byte slice
 func (slack *Slack) prepareMsg(msg string, color string) []byte {
-	data := fmt.Sprintf(`"mrkdwn_in": ["text"], "text": "%s"`, msg)
+	data := fmt.Sprintf(`"mrkdwn_in": ["text"], "text": "%s"`, sanitize(msg))
 	data = appendOption(data, "color", color)
 	data = appendOption(data, "channel", slack.Channel)
 	data = appendOption(data, "icon_emoji", slack.Emoji)
@@ -82,6 +82,10 @@ func appendOption(data string, k string, v string) string {
 
 func present(i string) bool {
 	return len(i) > 0
+}
+
+func sanitize(s string) string {
+	return strings.Replace(s, `"`, "", -1)
 }
 
 func check(err error) {
