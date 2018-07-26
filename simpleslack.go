@@ -3,6 +3,7 @@ package simpleslack
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 )
