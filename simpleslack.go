@@ -67,8 +67,12 @@ func (slack *Slack) send(payload []byte) {
 
 	client := &http.Client{}
 	resp, err := client.Do(r)
-	defer resp.Body.Close()
 	check(err)
+	if err != nil { // TODO: remove it and handle errors properly
+		return
+	}
+
+	resp.Body.Close()
 }
 
 // Add proper keys to payload
@@ -90,6 +94,6 @@ func sanitize(s string) string {
 
 func check(err error) {
 	if err != nil {
-		panic(err)
+		log.Println(err) // TODO: just return errors to the caller
 	}
 }
